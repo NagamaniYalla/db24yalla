@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to  Nagamani Yalla #{title}
+  button(type="button", class="btn btn-secondary", onclick="update()") Press Me                                                             
+  <br>
+  <br>
+  div(id="target") Display
+  a(href = '/fan') Nachos Page link
+  |
+  script. 
+    let client_count = 0;
+    function update() {
+      client_count = client_count + 1;
+      document.getElementById("target").innerHTML = `Value now ${client_count}`  ;
+      }
