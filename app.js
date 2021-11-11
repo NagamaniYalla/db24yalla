@@ -47,17 +47,17 @@ async function recreateDB(){
   // Delete everything 
   await nachos.deleteMany();
  
-  let instance1 = new nachos({nachos_type:"Cheese",  taste:'sweet', cost:30}); 
+  let instance1 = new nachos({flavour:"Cheese",  taste:"sweet", cost:30}); 
   instance1.save( function(err,doc) { 
       if(err) return console.error(err); 
       console.log("First object saved") 
   }); 
-  let instance2 = new nachos({nachos_type:"Hot & Spicy",  taste:'spicy', cost:25}); 
+  let instance2 = new nachos({flavour:"Hot & Spicy",  taste:"spicy", cost:25}); 
   instance2.save( function(err,doc) { 
       if(err) return console.error(err); 
       console.log("Second object saved") 
   });
-  let instance3 = new nachos({nachos_type:"Masala",  taste:'spicy', cost:40}); 
+  let instance3 = new nachos({flavour:"Masala",  taste:"spicy", cost:40}); 
   instance3.save( function(err,doc) { 
       if(err) return console.error(err); 
       console.log("Third object saved") 

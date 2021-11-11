@@ -19,8 +19,7 @@ router.post('/nachos', nachos_controller.nachos_create_post);
 router.delete('/nachos/:id', nachos_controller.nachos_delete); 
  
 // PUT request to update nachos. 
-router.put('/nachos/:id', 
-nachos_controller.nachos_update_put); 
+router.put('/nachos/:id',nachos_controller.nachos_update_put); 
  
 // GET request for one nachos. 
 router.get('/nachos/:id', nachos_controller.nachos_detail); 

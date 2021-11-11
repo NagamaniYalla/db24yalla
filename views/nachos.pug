@@ -2,29 +2,12 @@ extends layout
 
 block content
   h1= title
+  - let items = results
   p Search results Nachos 
   p 
   div(class="container-fluid")
         div(class="row")
-            -
-                let nachos = [
-                    {
-                        "flavour": "Cheese",
-                        "taste": "sweet" ,
-                        "cost": 30
-                    },
-                    {
-                        "flavour": "Hot & Spicy",
-                        "taste": "spicy" ,
-                        "cost": 25
-                    },
-                    {
-                        "flavour": "Masala",
-                        "taste": "spicy" ,
-                        "cost": 40
-                    },                   
-                ]
-            each v,index in nachos 
+            each v,index in items 
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.flavour}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.taste}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}
