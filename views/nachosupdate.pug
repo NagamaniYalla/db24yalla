@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let nachosid = toShow._id 
+  - let flavour = toShow.flavour
+  - let taste = toShow.taste
+  - let cost  = toShow.cost  
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{nachosid} 
+  - let actionid = "/resource/nachos/" + nachosid 
+  form(id='nachosForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.nachosAttr(for='flavour') nachos flavour 
+        input#flavour(type='text', name='flavour', value= flavour ) 
+    div.form-group 
+        label.nachosAttr(for='taste') nachos taste 
+        input#taste(type='text', name='taste', value= taste ) 
+    div.form-group 
+        label.nachosAttr(for='cost ') nachos cost 
+        input#cost(type='number', name='cost', value= cost  ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['nachosForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.text(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    });

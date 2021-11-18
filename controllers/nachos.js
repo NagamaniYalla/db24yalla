@@ -109,3 +109,42 @@ exports.nachos_view_one_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
    };
+   // Handle building the view for creating a nachos.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.nachos_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('nachoscreate', { title: 'nachos Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+};
+// Handle building the view for updating a nachos.
+// query provides the id
+exports.nachos_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await nachos.findById(req.query.id)
+    res.render('nachosupdate', { title: 'nachos Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+};
+// Handle a delete one view with id from query
+exports.nachos_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await nachos.findById(req.query.id)
+    res.render('nachosdelete', { title: 'nachos Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+};

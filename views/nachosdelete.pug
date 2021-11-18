@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let nachosid = toShow._id 
+    - let flavour = toShow.flavour
+    - let taste   = toShow.taste  
+    - let cost  = toShow.cost 
+    - let actionid = "/resource/nachos/" + nachosid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='nachosAttr mr-3') nachos ID is: 
+        div #{nachosid} 
+      div.row 
+        div(class='nachosAttr mr-3') nachos flavour is: 
+        div #{flavour } 
+      div.row 
+        div(class='nachosAttr mr-3') nachos taste  is: 
+        div #{taste  } 
+      div.row 
+        div(class='nachosAttr mr-3') nachos cost is: 
+        div #{cost } 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home pcost  for the nachos collection 
+      window.location.href='/nachos' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      // Do not need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/nachos' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    }
