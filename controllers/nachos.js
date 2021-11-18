@@ -32,7 +32,7 @@ exports.nachos_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters. 
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
-    // {"costume_type":"goat", "cost":12, "size":"large"} 
+    // {"nachos_type":"goat", "cost":12, "size":"large"} 
     document.flavour = req.body.flavour; 
     document.taste = req.body.taste; 
     document.cost = req.body.cost; 
@@ -83,3 +83,29 @@ exports.nachos_view_all_Page = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
+// Handle nachos delete on DELETE.
+exports.nachos_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await nachos.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.nachos_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await nachos.findById( req.query.id)
+    res.render('nachosdetail',
+   { title: 'nachos Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };

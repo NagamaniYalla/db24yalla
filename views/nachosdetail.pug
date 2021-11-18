@@ -1,0 +1,21 @@
+extends layout
+block content
+ h1= title
+
+ - let nachosid = toShow._id
+ - let flavour = toShow.flavour
+ - let taste = toShow.taste
+ - let cost  = toShow.cost
+ div
+ div.row
+ div(class='nachosAttr mr-3') nachos ID is:
+ div #{nachosid}
+ div.row
+ div(class='nachosAttr mr-3') nachos flavour is:
+ div #{flavour}
+ div.row
+ div(class='nachosAttr mr-3') nachos taste is:
+ div #{taste}
+ div.row
+ div(class='nachosAttr mr-3') nachos cost is:
+ div #{cost}
