@@ -5,16 +5,17 @@ block content
   - let items = results
   p Search results Nachos 
   p 
-  div(class="container-fluid")
-        div(class="row")
-            each v,index in items 
-                div(class="card text-white bg-dark mb-3" class='col' class='card' class='card-body' class='card-text' onclick='buy('+index+')') #{o}  
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.flavour}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.taste}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.cost}
-                a(href="nachos/update/?id="+v.id) Update
-                a(href="nachos/detail/?id="+v.id) View
-                a(href="nachos/delete/?id="+v.id) Delete
+  div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in items  
+        - let destination = `dispatch(\"/nachos/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.flavour}(#{item.taste}) is #{item.cost} 
+          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+   
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }               
   script.                
         function buy(intemNo)
         {
