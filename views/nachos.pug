@@ -1,24 +1,58 @@
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   - let items = results
+//-   p Search results Nachos 
+//-   p 
+//-   div(class="container-fluid") 
+//-     div(class="row m-1") 
+//-       each item in items  
+//-         - let destination = `dispatch(\"/nachos/update?id=${item._id}\")` 
+//-         div(class="row-sm-2", class="m-1") Item #{item.flavour}(#{item.taste}) is #{item.cost} 
+//-           button.btn( class="btn-primary ml-1", onclick= destination) Update 
+   
+//-   script. 
+//-     function dispatch(path){ 
+//-       window.location.href=path 
+//-     }               
+//-   script.                
+//-         function buy(intemNo)
+//-         {
+//-               alert(`you purchased Item ${intemNo+1}`)
+//-         }
 extends layout
 
 block content
   h1= title
-  - let items = results
-  p Search results Nachos 
-  p 
-  div(class="container-fluid") 
+  
+  p Search results nachos  
+  p
+  - let items = results 
+    div(class="container-fluid") 
     div(class="row m-1") 
       each item in items  
         - let destination = `dispatch(\"/nachos/update?id=${item._id}\")` 
-        div(class="row-sm-2", class="m-1") Item #{item.flavour}(#{item.taste}) is #{item.cost} 
-          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+         - let details = `dispatch(\"/nachos/detail?id=${item._id}\")` 
+
+        div(class="row-sm-2", class="m-1") Item #{item.brand}(#{item.flavour}) is #{item.cost} 
+          
+        <br><br>
+          
+            span(class="btn btn-info", onclick= details) Details
+            <br>
+            a(class="btn btn-danger", href="/nachos/delete/?id="+item._id) Delete
+            <br>
+
+            button.btn( class="btn-success ml-1", onclick= destination) Update        
    
   script. 
     function dispatch(path){ 
       window.location.href=path 
-    }               
+    }
+
   script.                
         function buy(intemNo)
         {
               alert(`you purchased Item ${intemNo+1}`)
         }
-  
