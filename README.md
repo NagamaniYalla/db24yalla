@@ -1,4 +1,4 @@
-# fwb24yalla
+# db24yalla
 This is my Assignment 10 repo
 
 [Heroku server] "https://db24yalla.herokuapp.com/" 
